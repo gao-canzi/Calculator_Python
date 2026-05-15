@@ -2,10 +2,15 @@
 from __future__ import division
 import sys
 
-from PyQt4 import QtGui, QtCore
+from PyQt5 import QtCore
+from PyQt5.QtGui import QFont, QIcon
+from PyQt5.QtWidgets import (
+    QWidget, QApplication, QGridLayout, QTextBrowser, 
+    QPushButton, QMenuBar, QMessageBox, QAction  # ← 加上 QAction
+)
 
 ########################################################################
-class Example(QtGui.QWidget):
+class Example(QWidget):
     """"""
 
     #----------------------------------------------------------------------
@@ -35,15 +40,14 @@ class Example(QtGui.QWidget):
         
         
         #-------------------------------------------------------------------------
-        exitAction = QtGui.QAction(QtGui.QIcon('exit.png'), '&Exit', self)        
+        exitAction = QAction(QIcon('exit.png'), '&Exit', self)        
         exitAction.setShortcut('Ctrl+Q')
-        #exitAction.setStatusTip('Exit application')
-        exitAction.triggered.connect(QtGui.qApp.quit)
+        exitAction.triggered.connect(QApplication.quit)
         
-        aboutAction = QtGui.QAction(QtGui.QIcon(''), '&About', self)
+        aboutAction = QAction(QIcon(''), '&About', self)
         aboutAction.triggered.connect(self.OnAboutButton)
         
-        menubar = QtGui.QMenuBar()
+        menubar = QMenuBar()
         
         fileMenu = menubar.addMenu('&File')
         fileMenu.addAction(exitAction)
@@ -53,76 +57,72 @@ class Example(QtGui.QWidget):
         
         #----------------------------------------------------------------------
         global lcd
-        lcd = QtGui.QTextBrowser()
-        lcd.setFixedHeight(190)
-        lcd.setFont(QtGui.QFont("Microsoft YaHei", 20))
+        lcd = QTextBrowser()
+        lcd.setFixedHeight(300)
+        lcd.setFont(QFont("Microsoft YaHei", 64))
         
-        #lcd.setFixedWidth(100)
-        lcd.setText('0'.decode('utf-8'))
-        grid = QtGui.QGridLayout()
+        lcd.setText('0')
+        grid = QGridLayout()
         self.setLayout(grid)
-        #self.setMinimumSize(300, 300)
-        #self.setMaximumSize(300, 300)
-        #self.setGeometry( 200, 100, 200, 200 )
         grid.setSpacing(0)
         grid.addWidget(menubar, self.point, 0, 1, 4)
         grid.addWidget(lcd, self.point+1, 0, 1, 4)
         
         
         #----------------------------------------------------------------------
-        button_1 = QtGui.QPushButton('1')
-        button_2 = QtGui.QPushButton('2')
-        button_3 = QtGui.QPushButton('3')
-        button_4 = QtGui.QPushButton('4')
-        button_5 = QtGui.QPushButton('5')
-        button_6 = QtGui.QPushButton('6')
-        button_7 = QtGui.QPushButton('7')
-        button_8 = QtGui.QPushButton('8')
-        button_9 = QtGui.QPushButton('9')
-        button_0 = QtGui.QPushButton('0')
-        button_dot = QtGui.QPushButton('.')
-        button_equ = QtGui.QPushButton('=')
-        button_div = QtGui.QPushButton('/')
-        button_mul = QtGui.QPushButton('*')
-        button_add = QtGui.QPushButton('+')
-        button_sub = QtGui.QPushButton('-')
-        button_cls = QtGui.QPushButton('cls')
+        button_1 = QPushButton('1')
+        button_2 = QPushButton('2')
+        button_3 = QPushButton('3')
+        button_4 = QPushButton('4')
+        button_5 = QPushButton('5')
+        button_6 = QPushButton('6')
+        button_7 = QPushButton('7')
+        button_8 = QPushButton('8')
+        button_9 = QPushButton('9')
+        button_0 = QPushButton('0')
+        button_dot = QPushButton('.')
+        button_equ = QPushButton('=')
+        button_div = QPushButton('/')
+        button_mul = QPushButton('*')
+        button_add = QPushButton('+')
+        button_sub = QPushButton('-')
+        button_cls = QPushButton('cls')
         
-        button_0.setFixedSize(50, 50)
-        button_1.setFixedSize(50, 50)
-        button_2.setFixedSize(50, 50)
-        button_3.setFixedSize(50, 50)
-        button_4.setFixedSize(50, 50)
-        button_5.setFixedSize(50, 50)
-        button_6.setFixedSize(50, 50)
-        button_7.setFixedSize(50, 50)
-        button_8.setFixedSize(50, 50)
-        button_9.setFixedSize(50, 50)
-        button_dot.setFixedSize(50, 50)
-        button_equ.setFixedSize(200, 50)
-        button_div.setFixedSize(50, 50)
-        button_mul.setFixedSize(50, 50)
-        button_add.setFixedSize(50, 50)
-        button_sub.setFixedSize(50, 50)
-        button_cls.setFixedSize(50, 50)
+        button_0.setFixedSize(200, 150)
+        button_1.setFixedSize(200, 150)
+        button_2.setFixedSize(200, 150)
+        button_3.setFixedSize(200, 150)
+        button_4.setFixedSize(200, 150)
+        button_5.setFixedSize(200, 150)
+        button_6.setFixedSize(200, 150)
+        button_7.setFixedSize(200, 150)
+        button_8.setFixedSize(200, 150)
+        button_9.setFixedSize(200, 150)
+        button_dot.setFixedSize(200, 150)
+        button_equ.setFixedSize(800, 150)
+        button_div.setFixedSize(200, 150)
+        button_mul.setFixedSize(200, 150)
+        button_add.setFixedSize(200, 150)
+        button_sub.setFixedSize(200, 150)
+        button_cls.setFixedSize(200, 150)
         
-        button_0.setFont(QtGui.QFont("Microsoft YaHei", 16))
-        button_1.setFont(QtGui.QFont("Microsoft YaHei", 16))
-        button_2.setFont(QtGui.QFont("Microsoft YaHei", 16))
-        button_3.setFont(QtGui.QFont("Microsoft YaHei", 16))
-        button_4.setFont(QtGui.QFont("Microsoft YaHei", 16))
-        button_5.setFont(QtGui.QFont("Microsoft YaHei", 16))
-        button_6.setFont(QtGui.QFont("Microsoft YaHei", 16))
-        button_7.setFont(QtGui.QFont("Microsoft YaHei", 16))
-        button_8.setFont(QtGui.QFont("Microsoft YaHei", 16))
-        button_9.setFont(QtGui.QFont("Microsoft YaHei", 16))
-        button_dot.setFont(QtGui.QFont("Microsoft YaHei", 16))
-        button_equ.setFont(QtGui.QFont("Microsoft YaHei", 16))
-        button_div.setFont(QtGui.QFont("Microsoft YaHei", 16))
-        button_mul.setFont(QtGui.QFont("Microsoft YaHei", 16))
-        button_add.setFont(QtGui.QFont("Microsoft YaHei", 16))
-        button_sub.setFont(QtGui.QFont("Microsoft YaHei", 16))
-        button_cls.setFont(QtGui.QFont("Microsoft YaHei", 16))
+        button_0.setFont(QFont("Microsoft YaHei", 48))
+        button_1.setFont(QFont("Microsoft YaHei", 48))
+        button_2.setFont(QFont("Microsoft YaHei", 48))
+        button_3.setFont(QFont("Microsoft YaHei", 48))
+        button_4.setFont(QFont("Microsoft YaHei", 48))
+        button_5.setFont(QFont("Microsoft YaHei", 48))
+        button_6.setFont(QFont("Microsoft YaHei", 48))
+        button_7.setFont(QFont("Microsoft YaHei", 48))
+        button_8.setFont(QFont("Microsoft YaHei", 48))
+        button_9.setFont(QFont("Microsoft YaHei", 48))
+        button_dot.setFont(QFont("Microsoft YaHei", 48))
+        button_equ.setFont(QFont("Microsoft YaHei", 48))
+        button_div.setFont(QFont("Microsoft YaHei", 48))
+        button_mul.setFont(QFont("Microsoft YaHei", 48))
+        button_add.setFont(QFont("Microsoft YaHei", 48))
+        button_sub.setFont(QFont("Microsoft YaHei", 48))
+        button_cls.setFont(QFont("Microsoft YaHei", 48))
         
 
         grid.addWidget(button_7, self.point+2,0)
@@ -143,37 +143,57 @@ class Example(QtGui.QWidget):
         grid.addWidget(button_add, self.point+5,3)
         grid.addWidget(button_equ, self.point+6, 0, 1, 4)
 
+        self.resize(1000, 800)
         self.move(300, 400)
         self.setWindowTitle('Calculator')
-        grid.setSizeConstraint(QtGui.QLayout.SetFixedSize)
+        grid.setSizeConstraint(QGridLayout.SetFixedSize)
         self.show()
 
-        self.connect(button_0,QtCore.SIGNAL('clicked()'),self.func_button_0)
-        self.connect(button_1,QtCore.SIGNAL('clicked()'),self.func_button_1)
-        self.connect(button_2,QtCore.SIGNAL('clicked()'),self.func_button_2)
-        self.connect(button_3,QtCore.SIGNAL('clicked()'),self.func_button_3)
-        self.connect(button_4,QtCore.SIGNAL('clicked()'),self.func_button_4)
-        self.connect(button_5,QtCore.SIGNAL('clicked()'),self.func_button_5)
-        self.connect(button_6,QtCore.SIGNAL('clicked()'),self.func_button_6)
-        self.connect(button_7,QtCore.SIGNAL('clicked()'),self.func_button_7)
-        self.connect(button_8,QtCore.SIGNAL('clicked()'),self.func_button_8)
-        self.connect(button_9,QtCore.SIGNAL('clicked()'),self.func_button_9)
+        # 使用 PyQt5 新语法连接信号
+        button_0.clicked.connect(self.func_button_0)
+        button_1.clicked.connect(self.func_button_1)
+        button_2.clicked.connect(self.func_button_2)
+        button_3.clicked.connect(self.func_button_3)
+        button_4.clicked.connect(self.func_button_4)
+        button_5.clicked.connect(self.func_button_5)
+        button_6.clicked.connect(self.func_button_6)
+        button_7.clicked.connect(self.func_button_7)
+        button_8.clicked.connect(self.func_button_8)
+        button_9.clicked.connect(self.func_button_9)
 
-        self.connect(button_cls,QtCore.SIGNAL('clicked()'),self.func_button_cls)
-        self.connect(button_dot,QtCore.SIGNAL('clicked()'),self.func_button_dot)
+        button_cls.clicked.connect(self.func_button_cls)
+        button_dot.clicked.connect(self.func_button_dot)
 
-        self.connect(button_add,QtCore.SIGNAL('clicked()'),self.func_button_add)
-        self.connect(button_sub,QtCore.SIGNAL('clicked()'),self.func_button_sub)
-        self.connect(button_mul,QtCore.SIGNAL('clicked()'),self.func_button_mul)
-        self.connect(button_div,QtCore.SIGNAL('clicked()'),self.func_button_div)
+        button_add.clicked.connect(self.func_button_add)
+        button_sub.clicked.connect(self.func_button_sub)
+        button_mul.clicked.connect(self.func_button_mul)
+        button_div.clicked.connect(self.func_button_div)
 
-        self.connect(button_equ,QtCore.SIGNAL('clicked()'),self.func_button_equ)
+        button_equ.clicked.connect(self.func_button_equ)
 
-        #self.statusBar().showMessage('Ready')
         
     #----------------------------------------------------------------------
-    def OnAboutButton( self ):
-        QtGui.QMessageBox.about( self, 'About', "A Calculator!" )
+    def OnAboutButton(self):
+        dialog = QDialog(self)
+        dialog.setWindowTitle('About')
+        dialog.resize(300, 150)
+        dialog.setMinimumSize(200, 100)
+        dialog.setMaximumSize(600, 400)
+        dialog.setWindowFlags(QtCore.Qt.Dialog | QtCore.Qt.WindowTitleHint | QtCore.Qt.WindowCloseButtonHint | QtCore.Qt.WindowMaximizeButtonHint)
+
+        layout = QVBoxLayout(dialog)
+        label = QLabel("A Calculator!")
+        label.setAlignment(QtCore.Qt.AlignCenter)
+        label.setFont(QFont("Microsoft YaHei", 16))
+        layout.addWidget(label)
+
+        btn = QPushButton("OK")
+        btn.setFixedSize(80, 40)
+        btn.setFont(QFont("Microsoft YaHei", 12))
+        btn.clicked.connect(dialog.accept)
+        layout.addWidget(btn, alignment=QtCore.Qt.AlignCenter)
+
+        dialog.exec_()
     
          
     #----------------------------------------------------------------------
@@ -198,7 +218,7 @@ class Example(QtGui.QWidget):
             self.func_button_4()
 
         if event.key() == QtCore.Qt.Key_5:
-                    self.func_button_5()
+            self.func_button_5()
         
         if event.key() == QtCore.Qt.Key_6:
             self.func_button_6()
@@ -239,20 +259,20 @@ class Example(QtGui.QWidget):
         if self.flag_equ == 0:
 
             if self.flag == 0:
-                if self.num_1 == '0': #防止在QLineEdit里连续出现 0 ，比如 000.1
+                if self.num_1 == '0':
                     self.num_1 = '0'
                     lcd.setText(self.num_1)
                 else:
                     self.num_1 = self.num_1+'0'
                     lcd.setText(self.num_1)
             else:
-                if self.num_2 == '0' or '':
+                if self.num_2 == '0' or self.num_2 == '':
                     self.num_2 = '0'
                 else:
                     self.num_2 = self.num_2+'0'
-                    lcd.setText(self.num_1 + '\n' + self.flag_flag + '\n' + self.num_2)
-        else :
-            self.flag_equ =1 #Important:点击等号之后，除clear按键以外的按键都失效，用pass代替也可以，这里只是为了方便以后添加更多功能所以用了flag
+                    lcd.setText(self.num_1 + ' ' + self.flag_flag + ' ' + self.num_2)
+        else:
+            self.flag_equ = 1
 
     #----------------------------------------------------------------------
     def func_button_1(self):
@@ -268,14 +288,14 @@ class Example(QtGui.QWidget):
                     lcd.setText(self.num_1)
 
             else:
-                if self.num_2 == '0' or '':
+                if self.num_2 == '0' or self.num_2 == '':
                     self.num_2 = '1'
-                    lcd.setText(self.num_1 + '\n' + self.flag_flag + '\n' + self.num_2)
+                    lcd.setText(self.num_1 + ' ' + self.flag_flag + ' ' + self.num_2)
                 else:
                     self.num_2 = self.num_2 + '1'
-                    lcd.setText(self.num_1 + '\n' + self.flag_flag + '\n' + self.num_2)
-        else :
-            self.flag_equ =1
+                    lcd.setText(self.num_1 + ' ' + self.flag_flag + ' ' + self.num_2)
+        else:
+            self.flag_equ = 1
 
     #----------------------------------------------------------------------
     def func_button_2(self):
@@ -291,14 +311,14 @@ class Example(QtGui.QWidget):
                     lcd.setText(self.num_1)
 
             else:
-                if self.num_2 == '0' or '':
+                if self.num_2 == '0' or self.num_2 == '':
                     self.num_2 = '2'
-                    lcd.setText(self.num_1 + '\n' + self.flag_flag + '\n' + self.num_2)
+                    lcd.setText(self.num_1 + ' ' + self.flag_flag + ' ' + self.num_2)
                 else:
                     self.num_2 = self.num_2 + '2'
-                    lcd.setText(self.num_1 + '\n' + self.flag_flag + '\n' + self.num_2)
-        else :
-            self.flag_equ =1
+                    lcd.setText(self.num_1 + ' ' + self.flag_flag + ' ' + self.num_2)
+        else:
+            self.flag_equ = 1
 
     #----------------------------------------------------------------------
     def func_button_3(self):
@@ -314,14 +334,14 @@ class Example(QtGui.QWidget):
                     lcd.setText(self.num_1)
 
             else:
-                if self.num_2 == '0' or '':
+                if self.num_2 == '0' or self.num_2 == '':
                     self.num_2 = '3'
-                    lcd.setText(self.num_1 + '\n' + self.flag_flag + '\n' + self.num_2)
+                    lcd.setText(self.num_1 + ' ' + self.flag_flag + ' ' + self.num_2)
                 else:
                     self.num_2 = self.num_2 + '3'
-                    lcd.setText(self.num_1 + '\n' + self.flag_flag + '\n' + self.num_2)
-        else :
-            self.flag_equ =1
+                    lcd.setText(self.num_1 + ' ' + self.flag_flag + ' ' + self.num_2)
+        else:
+            self.flag_equ = 1
 
     #----------------------------------------------------------------------
     def func_button_4(self):
@@ -337,14 +357,14 @@ class Example(QtGui.QWidget):
                     lcd.setText(self.num_1)
 
             else:
-                if self.num_2 == '0' or '':
+                if self.num_2 == '0' or self.num_2 == '':
                     self.num_2 = '4'
-                    lcd.setText(self.num_1 + '\n' + self.flag_flag + '\n' + self.num_2)
+                    lcd.setText(self.num_1 + ' ' + self.flag_flag + ' ' + self.num_2)
                 else:
                     self.num_2 = self.num_2 + '4'
-                    lcd.setText(self.num_1 + '\n' + self.flag_flag + '\n' + self.num_2)
-        else :
-            self.flag_equ =1
+                    lcd.setText(self.num_1 + ' ' + self.flag_flag + ' ' + self.num_2)
+        else:
+            self.flag_equ = 1
 
     #----------------------------------------------------------------------
     def func_button_5(self):
@@ -360,14 +380,14 @@ class Example(QtGui.QWidget):
                     lcd.setText(self.num_1)
 
             else:
-                if self.num_2 == '0' or '':
-                    self.num_2 = '3'
-                    lcd.setText(self.num_1 + '\n' + self.flag_flag + '\n' + self.num_2)
+                if self.num_2 == '0' or self.num_2 == '':
+                    self.num_2 = '5'
+                    lcd.setText(self.num_1 + ' ' + self.flag_flag + ' ' + self.num_2)
                 else:
                     self.num_2 = self.num_2 + '5'
-                    lcd.setText(self.num_1 + '\n' + self.flag_flag + '\n' + self.num_2)
-        else :
-            self.flag_equ =1
+                    lcd.setText(self.num_1 + ' ' + self.flag_flag + ' ' + self.num_2)
+        else:
+            self.flag_equ = 1
 
     #----------------------------------------------------------------------
     def func_button_6(self):
@@ -383,14 +403,14 @@ class Example(QtGui.QWidget):
                     lcd.setText(self.num_1)
 
             else:
-                if self.num_2 == '0' or '':
+                if self.num_2 == '0' or self.num_2 == '':
                     self.num_2 = '6'
-                    lcd.setText(self.num_1 + '\n' + self.flag_flag + '\n' + self.num_2)
+                    lcd.setText(self.num_1 + ' ' + self.flag_flag + ' ' + self.num_2)
                 else:
                     self.num_2 = self.num_2 + '6'
-                    lcd.setText(self.num_1 + '\n' + self.flag_flag + '\n' + self.num_2)
-        else :
-            self.flag_equ =1
+                    lcd.setText(self.num_1 + ' ' + self.flag_flag + ' ' + self.num_2)
+        else:
+            self.flag_equ = 1
 
 
     #----------------------------------------------------------------------
@@ -407,14 +427,14 @@ class Example(QtGui.QWidget):
                     lcd.setText(self.num_1)
 
             else:
-                if self.num_2 == '0' or '':
+                if self.num_2 == '0' or self.num_2 == '':
                     self.num_2 = '7'
-                    lcd.setText(self.num_1 + '\n' + self.flag_flag + '\n' + self.num_2)
+                    lcd.setText(self.num_1 + ' ' + self.flag_flag + ' ' + self.num_2)
                 else:
                     self.num_2 = self.num_2 + '7'
-                    lcd.setText(self.num_1 + '\n' + self.flag_flag + '\n' + self.num_2)
-        else :
-            self.flag_equ =1
+                    lcd.setText(self.num_1 + ' ' + self.flag_flag + ' ' + self.num_2)
+        else:
+            self.flag_equ = 1
 
     #----------------------------------------------------------------------
     def func_button_8(self):
@@ -430,14 +450,14 @@ class Example(QtGui.QWidget):
                     lcd.setText(self.num_1)
 
             else:
-                if self.num_2 == '0' or '':
+                if self.num_2 == '0' or self.num_2 == '':
                     self.num_2 = '8'
-                    lcd.setText(self.num_1 + '\n' + self.flag_flag + '\n' + self.num_2)
+                    lcd.setText(self.num_1 + ' ' + self.flag_flag + ' ' + self.num_2)
                 else:
                     self.num_2 = self.num_2 + '8'
-                    lcd.setText(self.num_1 + '\n' + self.flag_flag + '\n' + self.num_2)
-        else :
-            self.flag_equ =1
+                    lcd.setText(self.num_1 + ' ' + self.flag_flag + ' ' + self.num_2)
+        else:
+            self.flag_equ = 1
 
     #----------------------------------------------------------------------
     def func_button_9(self):
@@ -453,14 +473,14 @@ class Example(QtGui.QWidget):
                     lcd.setText(self.num_1)
 
             else:
-                if self.num_2 == '0' or '':
+                if self.num_2 == '0' or self.num_2 == '':
                     self.num_2 = '9'
-                    lcd.setText(self.num_1 + '\n' + self.flag_flag + '\n' + self.num_2)
+                    lcd.setText(self.num_1 + ' ' + self.flag_flag + ' ' + self.num_2)
                 else:
                     self.num_2 = self.num_2 + '9'
-                    lcd.setText(self.num_1 + '\n' + self.flag_flag + '\n' + self.num_2)
-        else :
-            self.flag_equ =1
+                    lcd.setText(self.num_1 + ' ' + self.flag_flag + ' ' + self.num_2)
+        else:
+            self.flag_equ = 1
 
     #----------------------------------------------------------------------
     def func_button_dot(self):
@@ -473,7 +493,7 @@ class Example(QtGui.QWidget):
 
                     if self.num_1 == '0':
                         self.num_1 = '0.'
-                        print self.num_1
+                        print(self.num_1)
                         lcd.setText(self.num_1)
                     else:
                         self.num_1 = self.num_1 + '.'
@@ -484,12 +504,12 @@ class Example(QtGui.QWidget):
 
                     if self.num_2 == '':
                         self.num_2 = '0.'
-                        lcd.setText(self.num_1 + '\n' + self.flag_flag + '\n' + self.num_2)
+                        lcd.setText(self.num_1 + ' ' + self.flag_flag + ' ' + self.num_2)
                     else:
                         self.num_2 = self.num_2 + '.'
-                        lcd.setText(self.num_1 + '\n' + self.flag_flag + '\n' + self.num_2)
-        else :
-            self.flag_equ =1
+                        lcd.setText(self.num_1 + ' ' + self.flag_flag + ' ' + self.num_2)
+        else:
+            self.flag_equ = 1
 
     #----------------------------------------------------------------------
     def func_button_cls(self):
@@ -514,7 +534,7 @@ class Example(QtGui.QWidget):
             self.flag_mul = 0
             self.flag_div = 0
             self.flag_flag = '+'
-            lcd.setText(self.num_1 + '\n' + self.flag_flag + '\n' + self.num_2)
+            lcd.setText(self.num_1 + ' ' + self.flag_flag + ' ' + self.num_2)
         else:
             pass
 
@@ -526,10 +546,6 @@ class Example(QtGui.QWidget):
                 self.num_1 = '-'
                 lcd.setText(self.num_1)
 
-            #elif self.num_2 == '':
-                #self.num_2 = '-'
-                #lcd.setText(self.num_1 + '\n' + self.flag_flag + '\n' + self.num_2)
-
             else:
                 self.flag = 1
                 self.flag_add = 0
@@ -538,11 +554,11 @@ class Example(QtGui.QWidget):
                 self.flag_div = 0
                 self.flag_flag = '-'
 
-                lcd.setText(self.num_1 + '\n' + self.flag_flag + '\n' + self.num_2)
+                lcd.setText(self.num_1 + ' ' + self.flag_flag + ' ' + self.num_2)
         else:
             if self.num_2 == '':
                 self.num_2 = '-'
-                lcd.setText(self.num_1 + '\n' + self.flag_flag + '\n' + self.num_2)
+                lcd.setText(self.num_1 + ' ' + self.flag_flag + ' ' + self.num_2)
 
     #----------------------------------------------------------------------
     def func_button_mul(self):
@@ -556,7 +572,7 @@ class Example(QtGui.QWidget):
             self.flag_div = 0
             self.flag_flag = '*'
 
-            lcd.setText(self.num_1 + '\n' + self.flag_flag + '\n' + self.num_2)
+            lcd.setText(self.num_1 + ' ' + self.flag_flag + ' ' + self.num_2)
         else:
             pass
 
@@ -571,7 +587,7 @@ class Example(QtGui.QWidget):
             self.flag_div = 1
             self.flag_flag = '/'
 
-            lcd.setText(self.num_1 + '\n' + self.flag_flag + '\n' + self.num_2)
+            lcd.setText(self.num_1 + ' ' + self.flag_flag + ' ' + self.num_2)
         else:
             pass
 
@@ -594,7 +610,7 @@ class Example(QtGui.QWidget):
                     else:
                         self.num_3 = str(int(self.num_1) + int(self.num_2))
 
-                lcd.setText(self.num_1 + '\n' + self.flag_flag + '\n' + self.num_2 + '\n=\n' + self.num_3)
+                lcd.setText(self.num_1 + ' ' + self.flag_flag + ' ' + self.num_2 + ' = ' + self.num_3)
                 self.flag = 0
                 self.num_1 = '0'
                 self.num_2 = ''
@@ -615,7 +631,7 @@ class Example(QtGui.QWidget):
                     else:
                         self.num_3 = str(int(self.num_1) - int(self.num_2))
 
-                lcd.setText(self.num_1 + '\n' + self.flag_flag + '\n' + self.num_2 + '\n=\n' + self.num_3)
+                lcd.setText(self.num_1 + ' ' + self.flag_flag + ' ' + self.num_2 + ' = ' + self.num_3)
                 self.flag = 0
                 self.num_1 = '0'
                 self.num_2 = ''
@@ -637,7 +653,7 @@ class Example(QtGui.QWidget):
                     else:
                         self.num_3 = str(int(self.num_1) * int(self.num_2))
 
-                lcd.setText(self.num_1 + '\n' + self.flag_flag + '\n' + self.num_2 + '\n=\n' + self.num_3)
+                lcd.setText(self.num_1 + ' ' + self.flag_flag + ' ' + self.num_2 + ' = ' + self.num_3)
                 self.flag = 0
                 self.num_1 = '0'
                 self.num_2 = ''
@@ -646,7 +662,7 @@ class Example(QtGui.QWidget):
             elif self.flag_flag == '/':
 
                 if self.num_2 == '0':
-                    lcd.setText("0不能作为除数！".decode('utf-8'))
+                    lcd.setText("0不能作为除数！")
                     self.flag = 0
                     self.num_1 = '0'
                     self.num_2 = ''
@@ -656,14 +672,14 @@ class Example(QtGui.QWidget):
                     self.num_3 = float(self.num_1) / float(self.num_2)
 
                     if (self.num_3 * 10) % 10 == 0:
-                        lcd.setText(self.num_1 + '\n' + self.flag_flag + '\n' + self.num_2 + '\n=\n' + str(int(self.num_3)))
+                        lcd.setText(self.num_1 + ' ' + self.flag_flag + ' ' + self.num_2 + ' = ' + str(int(self.num_3)))
 
                         self.flag = 0
                         self.num_1 = '0'
                         self.num_2 = ''
                         self.num_3 = ''
                     else:
-                        lcd.setText(self.num_1 + '\n' + self.flag_flag + '\n' + self.num_2 + '\n=\n' + str(float(self.num_3)))
+                        lcd.setText(self.num_1 + ' ' + self.flag_flag + ' ' + self.num_2 + ' = ' + str(float(self.num_3)))
 
                         self.flag = 0
                         self.num_1 = '0'
@@ -677,7 +693,7 @@ class Example(QtGui.QWidget):
 #----------------------------------------------------------------------
 def main():
     """"""
-    app = QtGui.QApplication(sys.argv)
+    app = QApplication(sys.argv)
     ex = Example()
     sys.exit(app.exec_())
 
