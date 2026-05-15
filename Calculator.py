@@ -176,9 +176,9 @@ class Example(QWidget):
     def OnAboutButton(self):
         dialog = QDialog(self)
         dialog.setWindowTitle('About')
-        dialog.resize(300, 150)
-        dialog.setMinimumSize(200, 100)
-        dialog.setMaximumSize(600, 400)
+        dialog.resize(800, 800)
+        dialog.setMinimumSize(800, 800)
+        dialog.setMaximumSize(800, 800)
         dialog.setWindowFlags(QtCore.Qt.Dialog | QtCore.Qt.WindowTitleHint | QtCore.Qt.WindowCloseButtonHint | QtCore.Qt.WindowMaximizeButtonHint)
 
         layout = QVBoxLayout(dialog)
